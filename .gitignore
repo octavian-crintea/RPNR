@@ -1,14 +1,40 @@
-.DS_Store
-*.swp
-*~.nib
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+*.pyc
 
-build
+# Precompiled Headers
+*.gch
+*.pch
 
-*.pbxuser
-*.perspective
-*.perspectivev3
-*.xcworkspace
-xcuserdata
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
 
-*.mode1v3
-*.mode2v3
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+
+# Eclipse files
+.project
+.pydevproject
+
+# Temp and backup files
+*~
