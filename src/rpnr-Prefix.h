@@ -1,7 +1,7 @@
 //
 //  Prefix header
 //
-//  The contents of this file are implicitly included at the beginning of every source file.
+//  The contents of this file should be included at the beginning of every source file.
 //
 
 #define GCD

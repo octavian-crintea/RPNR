@@ -9,7 +9,8 @@
 #include "LMImageRepresentation.h"
 
 #include <iostream>
-#include <math.h>
+#include <cstring>
+#include <cmath>
 
 double LMImageRepresentation::differenceFactor(
                                                uint64_t x, uint64_t y,

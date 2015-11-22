@@ -9,6 +9,8 @@
 #include "LMImageRepresentation.h"
 #include "IO.h"
 
+#include <cstring>
+
 void LMPrintHelp()
 {
   std::cout

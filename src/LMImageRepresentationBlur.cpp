@@ -9,7 +9,8 @@
 #include "LMImageRepresentation.h"
 
 #include <iostream>
-#include <math.h>
+#include <cstring>
+#include <cmath>
 
 bool LMImageRepresentation::blur(int16_t radius)
 {

@@ -9,6 +9,7 @@
 #include "LMImageRepresentation.h"
 
 #include <iostream>
+#include <cstring>
 
 LMImageRepresentation::LMImageRepresentation(uint8_t* bytes, uint8_t bitsPerPixel, uint64_t bytesPerRow, uint64_t bytesPerPlane, uint8_t samplesPerPixel)
 {

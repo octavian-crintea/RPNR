@@ -10,6 +10,7 @@
 #define __rpnr__LMImageRepresentation__
 
 #include <iostream>
+#include <cstdint>
 
 class LMImageRepresentation
 {
