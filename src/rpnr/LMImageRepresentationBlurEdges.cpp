@@ -9,7 +9,7 @@
 #include "LMImageRepresentation.h"
 
 #include <iostream>
-#include <math.h>
+#include <cmath>
 
 bool LMImageRepresentation::blurEdges(float edgeBlurWeight,
                                       LMImageRepresentation* originalCombined,
