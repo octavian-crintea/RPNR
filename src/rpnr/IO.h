@@ -13,5 +13,6 @@ class LMImageRepresentation;
 
 extern LMImageRepresentation* loadImageData(const char* workingPath, const char* imageName);
 extern bool saveImageData(LMImageRepresentation* rep, const char* workingPath, const char* imageName);
+extern bool testIO(const char* workingPath, const char* inFile, const char* outFile);
 
 #endif
