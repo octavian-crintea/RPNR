@@ -12,6 +12,12 @@
 #include <cstring>
 #include <cmath>
 
+#ifdef GCD
+#include <dispatch/dispatch.h>
+#else
+#include <omp.h>
+#endif
+
 bool LMImageRepresentation::blur(int16_t radius)
 {
   if(radius == 0)
@@ -30,6 +36,7 @@ bool LMImageRepresentation::blur(int16_t radius)
   {
     uint32_t x = (uint32_t)i;
 #else
+#pragma omp parallel for
   for(uint32_t x=0; x<_width; x++)
   {
 #endif
@@ -69,6 +76,7 @@ bool LMImageRepresentation::blur(int16_t radius)
   {
     uint32_t x = (uint32_t)i;
 #else
+#pragma omp parallel for
   for(uint32_t x=0; x<_width; x++)
   {
 #endif

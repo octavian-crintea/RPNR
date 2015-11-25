@@ -35,6 +35,7 @@
 # Eclipse files
 .project
 .pydevproject
+.cproject
 
 # Temp and backup files
 *~

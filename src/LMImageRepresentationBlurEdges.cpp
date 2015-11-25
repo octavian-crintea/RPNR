@@ -11,6 +11,12 @@
 #include <iostream>
 #include <cmath>
 
+#ifdef GCD
+#include <dispatch/dispatch.h>
+#else
+#include <omp.h>
+#endif
+
 bool LMImageRepresentation::blurEdges(float edgeBlurWeight,
                                       LMImageRepresentation* originalCombined,
                                       LMImageRepresentation* originalCombinedBlurred,
@@ -39,6 +45,7 @@ bool LMImageRepresentation::blurEdges(float edgeBlurWeight,
   {
     uint32_t x = (uint32_t)i;
 #else
+#pragma omp parallel for
   for(uint32_t x=0; x<_width; x++)
   {
 #endif
