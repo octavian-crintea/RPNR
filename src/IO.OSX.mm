@@ -8,7 +8,11 @@
 
 #if (TARGET_OS_MAC)
 
+#include "IO.h"
 #include "LMImageRepresentation.h"
+  
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
 LMImageRepresentation* loadImageData(const char* workingPath, const char* imageName)
 {

@@ -11,6 +11,10 @@
 #include <iostream>
 #include <cmath>
 
+#ifdef GCD
+#include <dispatch/dispatch.h>
+#endif
+
 bool LMImageRepresentation::blurEdges(float edgeBlurWeight,
                                       LMImageRepresentation* originalCombined,
                                       LMImageRepresentation* originalCombinedBlurred,

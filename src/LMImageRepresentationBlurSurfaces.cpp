@@ -12,6 +12,10 @@
 #include <cstring>
 #include <cmath>
 
+#ifdef GCD
+#include <dispatch/dispatch.h>
+#endif
+
 double LMImageRepresentation::differenceFactor(
                                                uint64_t x, uint64_t y,
                                                uint64_t otherX, uint64_t otherY,

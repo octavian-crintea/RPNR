@@ -12,6 +12,10 @@
 #include <cstring>
 #include <cmath>
 
+#ifdef GCD
+#include <dispatch/dispatch.h>
+#endif
+
 bool LMImageRepresentation::blur(int16_t radius)
 {
   if(radius == 0)
