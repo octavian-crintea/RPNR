@@ -14,6 +14,8 @@
 
 #ifdef GCD
 #include <dispatch/dispatch.h>
+#else
+#include <omp.h>
 #endif
 
 double LMImageRepresentation::differenceFactor(
@@ -112,6 +114,7 @@ bool LMImageRepresentation::blurSurfaces(
     {
       uint32_t x = (uint32_t)i;
 #else
+#pragma omp parallel for
     for(uint32_t x=0; x<_width; x++)
     {
 #endif

@@ -1,6 +1,6 @@
 CXX = g++
-CXXFLAGS = -Wall -std=c++0x -g
-LDLIBS = -lpng
+CXXFLAGS = -Wall -std=c++0x -g -fopenmp
+LDLIBS = -lpng -fopenmp
 
 .PHONY: all clean
 
