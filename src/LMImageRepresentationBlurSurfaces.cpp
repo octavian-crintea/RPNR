@@ -11,12 +11,7 @@
 #include <iostream>
 #include <cstring>
 #include <cmath>
-
-#ifdef GCD
-#include <dispatch/dispatch.h>
-#else
 #include <omp.h>
-#endif
 
 double LMImageRepresentation::differenceFactor(
                                                uint64_t x, uint64_t y,
@@ -108,16 +103,10 @@ bool LMImageRepresentation::blurSurfaces(
       deltaY = 1;
       maxConvolutionOffset = _height;
     }
-    
-#ifdef GCD
-    dispatch_apply(_width, dispatch_get_global_queue(0, 0), ^(size_t i)
-    {
-      uint32_t x = (uint32_t)i;
-#else
+
 #pragma omp parallel for
     for(uint32_t x=0; x<_width; x++)
     {
-#endif
       // place to store the difference factors for a pixel once we reach them
       double* differenceFactors = (double*)calloc(2*radius+1, sizeof(double));
       uint8_t originalValue;
@@ -218,9 +207,6 @@ bool LMImageRepresentation::blurSurfaces(
       } // for y
       free(differenceFactors);
     } // for x
-#ifdef GCD
-    );
-#endif
   }
   
   free(bytesSource);

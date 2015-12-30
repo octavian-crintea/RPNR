@@ -11,12 +11,7 @@
 #include <iostream>
 #include <cstring>
 #include <cmath>
-
-#ifdef GCD
-#include <dispatch/dispatch.h>
-#else
 #include <omp.h>
-#endif
 
 bool LMImageRepresentation::blur(int16_t radius)
 {
@@ -31,15 +26,9 @@ bool LMImageRepresentation::blur(int16_t radius)
 
   // this method we run the image twice. doing horizontal blur, then vertical blur
   // run the image in one axis
-#ifdef GCD
-  dispatch_apply(_width, dispatch_get_global_queue(0, 0), ^(size_t i)
-  {
-    uint32_t x = (uint32_t)i;
-#else
 #pragma omp parallel for
   for(uint32_t x=0; x<_width; x++)
   {
-#endif
     uint32_t value;
     for(uint32_t y=0; y<_height; y++)
     {
@@ -63,23 +52,14 @@ bool LMImageRepresentation::blur(int16_t radius)
       } // for sample
     } // for y
   } // for x
-#ifdef GCD
-  );
-#endif
     
   // update the results
   memcpy(bytesOriginal, _bytes, _bytesPerPlane);
     
   // run the image in the other axis
-#ifdef GCD
-  dispatch_apply(_width, dispatch_get_global_queue(0, 0), ^(size_t i)
-  {
-    uint32_t x = (uint32_t)i;
-#else
 #pragma omp parallel for
   for(uint32_t x=0; x<_width; x++)
   {
-#endif
     uint32_t value;
     for(uint32_t y=0; y<_height; y++)
     {
@@ -104,9 +84,6 @@ bool LMImageRepresentation::blur(int16_t radius)
       } // for sample
     } // for y
   } // for x
-#ifdef GCD
-  );
-#endif
   
   free(bytesOriginal);
   return true;

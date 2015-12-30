@@ -10,12 +10,7 @@
 
 #include <iostream>
 #include <cmath>
-
-#ifdef GCD
-#include <dispatch/dispatch.h>
-#else
 #include <omp.h>
-#endif
 
 bool LMImageRepresentation::blurEdges(float edgeBlurWeight,
                                       LMImageRepresentation* originalCombined,
@@ -40,15 +35,9 @@ bool LMImageRepresentation::blurEdges(float edgeBlurWeight,
   
   uint8_t tolerance = 1;
   
-#ifdef GCD
-  dispatch_apply(_width, dispatch_get_global_queue(0, 0), ^(size_t i)
-  {
-    uint32_t x = (uint32_t)i;
-#else
 #pragma omp parallel for
   for(uint32_t x=0; x<_width; x++)
   {
-#endif
     for(uint32_t y=0; y<_height; y++)
     {
       uint8_t diff = 0;
@@ -78,8 +67,5 @@ bool LMImageRepresentation::blurEdges(float edgeBlurWeight,
       }
     }
   }
-#ifdef GCD
-    );
-#endif
   return true;
 }
