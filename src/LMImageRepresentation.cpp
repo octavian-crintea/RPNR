@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <omp.h>
 
 LMImageRepresentation::LMImageRepresentation(uint8_t* bytes, uint8_t bitsPerPixel, uint64_t bytesPerRow, uint64_t bytesPerPlane, uint8_t samplesPerPixel)
 {
@@ -77,6 +78,7 @@ bool LMImageRepresentation::invert()
 {
   if(_bitsPerPixel == 8)
   {
+#pragma omp parallel for
     for(uint64_t i=0; i<_bytesPerPlane; i++)
     {
       _bytes[i] = 0xFF-_bytes[i];
@@ -100,6 +102,7 @@ bool LMImageRepresentation::convertFromColorToGrayscale()
   uint8_t bitsPerSample = _bitsPerPixel/_samplesPerPixel;
   if(bitsPerSample == 8)
   {
+#pragma omp parallel for
     for(uint64_t i=0; i<_bytesPerPlane; i+=_samplesPerPixel)
     {
       uint16_t value = 0;
@@ -115,6 +118,8 @@ bool LMImageRepresentation::convertFromColorToGrayscale()
     uint16_t* samples16 = (uint16_t*)_bytes;
     uint16_t* newSamples16 = (uint16_t*)newBytes;
     uint64_t totalSamples = (uint64_t)_width*_height*_samplesPerPixel;
+    
+#pragma omp parallel for
     for(uint64_t i=0; i<totalSamples; i+=_samplesPerPixel)
     {
       uint32_t value = 0;
@@ -148,6 +153,8 @@ bool LMImageRepresentation::convertFromGrayscale8ToColor24()
     return false;
   
   uint8_t* newBytes = (uint8_t*)calloc(1, _bytesPerPlane*3); // potential overflow at _bytesPerPlane*3 if image is huge
+  
+#pragma omp parallel for
   for(uint64_t i=0; i<_bytesPerPlane; i++)
   {
     newBytes[i*3] = _bytes[i];
