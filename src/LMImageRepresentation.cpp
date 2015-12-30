@@ -12,7 +12,7 @@
 #include <cstring>
 #include <omp.h>
 
-LMImageRepresentation::LMImageRepresentation(uint8_t* bytes, uint8_t bitsPerPixel, uint64_t bytesPerRow, uint64_t bytesPerPlane, uint8_t samplesPerPixel)
+LMImageRepresentation::LMImageRepresentation(uint8_t* bytes, uint8_t bitsPerPixel, uint64_t bytesPerRow, uint64_t bytesPerPlane, uint8_t samplesPerPixel, uint8_t color_type)
 {
   _bytes = (uint8_t*)calloc(bytesPerPlane, sizeof(uint8_t));
   memcpy(_bytes, bytes, bytesPerPlane);
@@ -20,6 +20,7 @@ LMImageRepresentation::LMImageRepresentation(uint8_t* bytes, uint8_t bitsPerPixe
   _bytesPerRow = bytesPerRow;
   _bytesPerPlane = bytesPerPlane;
   _samplesPerPixel = samplesPerPixel;
+  _color_type = color_type;
   
   _width = (uint32_t)(_bytesPerRow/(_bitsPerPixel/8));
   _height = (uint32_t)(_bytesPerPlane/_bytesPerRow);
@@ -35,6 +36,7 @@ LMImageRepresentation::LMImageRepresentation(LMImageRepresentation* other)
   _bytesPerRow = other->_bytesPerRow;
   _bytesPerPlane = other->_bytesPerPlane;
   _samplesPerPixel = other->_samplesPerPixel;
+  _color_type = other->_color_type;
   
   _width = other->_width;
   _height = other->_height;

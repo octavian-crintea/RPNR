@@ -69,6 +69,7 @@ LMImageRepresentation* loadImageData(const char* workingPath, const char* imageN
     uint32_t widthBytes = png_get_rowbytes(pngPtr, infoPtr);
     uint8_t channels = png_get_channels(pngPtr, infoPtr);
     uint8_t bitDepth = png_get_bit_depth(pngPtr, infoPtr);
+    uint8_t color_type = png_get_color_type(pngPtr, infoPtr);
 
     uint8_t** rowPtrs = (uint8_t**) malloc(height * sizeof(uint8_t*));
     if (rowPtrs == NULL) {
@@ -99,7 +100,8 @@ LMImageRepresentation* loadImageData(const char* workingPath, const char* imageN
                                   bitDepth * channels,
                                   widthBytes,
                                   widthBytes * height,
-                                  channels);
+                                  channels,
+                                  color_type);
 
     free(matrix);
     free(rowPtrs);
@@ -137,9 +139,7 @@ bool saveImageData(LMImageRepresentation* rep, const char* workingPath, const ch
                  rep->_width,
                  rep->_height,
                  rep->_bitsPerPixel / rep->_samplesPerPixel,
-                 rep->_samplesPerPixel - 1, // not quite sure, please verify the
-                                            // relation between color_type and
-                                            // channels (samplesPerPixel)
+                 rep->_color_type,
                  PNG_INTERLACE_NONE,
                  PNG_COMPRESSION_TYPE_BASE,
                  PNG_FILTER_TYPE_BASE);

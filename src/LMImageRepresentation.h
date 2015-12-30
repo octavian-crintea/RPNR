@@ -20,13 +20,14 @@ public:
   uint64_t _bytesPerRow;
   uint64_t _bytesPerPlane;
   uint8_t _samplesPerPixel;
+  uint8_t _color_type;
   
   uint32_t _width;
   uint32_t _height;
   
   uint8_t _toleranceOverride;
   
-  LMImageRepresentation(uint8_t* bytes, uint8_t bitsPerPixel, uint64_t bytesPerRow, uint64_t bytesPerPlane, uint8_t samplesPerPixel);
+  LMImageRepresentation(uint8_t* bytes, uint8_t bitsPerPixel, uint64_t bytesPerRow, uint64_t bytesPerPlane, uint8_t samplesPerPixel, uint8_t color_type);
   LMImageRepresentation(LMImageRepresentation* other);
   ~LMImageRepresentation();
   
